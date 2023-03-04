@@ -24,6 +24,15 @@ local activeStat = {
     mvt = { func = nil, upvalue = 0 },
 }
 
+local cooldown = {
+    keybindAction = false,
+    e = { false },
+    rightShift = false,
+    v = { false },
+    l = { false },
+    n = false,
+    j = { false }
+}
 --// Animation
 local TPanimSets = ReplicatedStorage.animationSets.TPanimSets
 TPanimSets.global.shove.AnimationId = TPanimSets["2H"].final.AnimationId
@@ -425,7 +434,41 @@ _G.connection[1] = UserInputService.InputBegan:Connect(function(input, gameProce
                 end)
             end
         end
+        
+        if input.KeyCode == Enum.KeyCode.N then
+        if cooldown.n == true or cooldown.keybindAction == true then
+            return
+        end
 
+        cooldown.keybindAction = true
+        cooldown.n = true
+
+        workspace.ServerStuff.handlePerkVisibility:FireServer("scanner")
+
+        local animation = localPlayer.Character.Humanoid.Animator:LoadAnimation(tpAnimSets.special.radio)
+        animation.Priority = Enum.AnimationPriority.Action
+        animation:Play()
+
+        local random = math.random(1, 2)
+        workspace.ServerStuff.playAudio:FireServer({ "ai" }, "radio_call" .. random, localPlayer.Character)
+        localPlayer.Character:WaitForChild("radio_call" .. random).Ended:Wait()
+
+        local perk = localPlayer.Character.current_perk.Value
+        workspace.ServerStuff.changeStats:InvokeServer("changeclass", "shadow")
+
+        workspace.ServerStuff.dealDamage:FireServer("shadowhunter", nil, _G.serverKey, _G.playerKey)
+        workspace.ServerStuff.dealDamage:FireServer("shadowhunter", nil, _G.serverKey, _G.playerKey)
+
+        workspace.ServerStuff.changeStats:InvokeServer("changeclass", perk)
+
+        workspace.ServerStuff.handlePerkVisibility:FireServer("hide_perk")
+        cooldown.keybindAction = false
+
+        task.delay(30, function()
+            cooldown.n = false
+        end)
+    end
+        
         if input.KeyCode == Enum.KeyCode.J then
             if toggle.healing[1] == true or toggle.using == true then
                 return
@@ -557,7 +600,7 @@ _G.connection[1] = UserInputService.InputBegan:Connect(function(input, gameProce
             local ohTable4 = {
             [1] = Vector3.new(21.761, 23.441, -8.3437), -- you can put in some positions
             [2] = "GET UP SOLDIER",
-            [3] = 2 -- this handles the icon of ping, if 6 or higher icon will be hidden
+            [3] = 6 -- this handles the icon of ping, if 6 or higher icon will be hidden
             }
 
             workspace.ServerStuff.applyGore:FireServer(ohString1, ohInstance2, ohInstance3, ohTable4)
