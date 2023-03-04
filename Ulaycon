@@ -445,10 +445,6 @@ _G.connection[1] = UserInputService.InputBegan:Connect(function(input, gameProce
 
         workspace.ServerStuff.handlePerkVisibility:FireServer("scanner")
 
-        local animation = localPlayer.Character.Humanoid.Animator:LoadAnimation(tpAnimSets.special.radio)
-        animation.Priority = Enum.AnimationPriority.Action
-        animation:Play()
-
         local random = math.random(1, 2)
         workspace.ServerStuff.playAudio:FireServer({ "ai" }, "radio_call" .. random, localPlayer.Character)
         localPlayer.Character:WaitForChild("radio_call" .. random).Ended:Wait()
