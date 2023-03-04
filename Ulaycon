@@ -601,7 +601,7 @@ _G.connection[1] = UserInputService.InputBegan:Connect(function(input, gameProce
 
             workspace.ServerStuff.applyGore:FireServer(ohString1, ohInstance2, ohInstance3, ohTable4)
             task.wait(1)
-            workspace.ServerStuff.playAudio:FireServer({"songs", "holdout_bosses"}, "zealot", workspace)
+            workspace.ServerStuff.playAudio:FireServer({"songs"}, "holdout_fight4", workspace)
             task.wait(1)
             local playerAnimation = game.Workspace.SpawnModel.Humanoid.Animator:LoadAnimation(game.ReplicatedStorage.animationSets.TPanimSets["special"].getup)
             playerAnimation.Priority = Enum.AnimationPriority.Action
