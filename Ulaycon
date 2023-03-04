@@ -301,7 +301,6 @@ local function start()
     spawnItem("MMachete", 1)
     spawnItem("FNLMG", 2)
     spawnItem("DEFStim", 3)
-    spawnItem("TGas", 4)
     getActiveStat()
 
     workspace.ServerStuff.dropAmmo:FireServer("scrap", 90)
