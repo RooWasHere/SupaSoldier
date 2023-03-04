@@ -652,7 +652,7 @@ end)
         workspace.ServerStuff.playAudio:FireServer({"holdout"}, "boss_incoming", workspace)
         wait(0.8)
         workspace.ServerStuff.playAudio:FireServer({"AGENT", "heavy"}, "heavy1", workspace)
-        workspace.ServerStuff.playAudio:FireServer({"machinery", "parts"}, "start", workspace
+        workspace.ServerStuff.playAudio:FireServer({"machinery", "parts"}, "start", workspace)
         task.wait(3)
         workspace.ServerStuff.playAudio:FireServer({"holdout", "boss_sounds"}, "rhyer", workspace)
 local ohString1 = "player_ping"
