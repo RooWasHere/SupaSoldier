@@ -30,7 +30,7 @@ local cooldown = {
     rightShift = false,
     v = { false },
     l = { false },
-    n = false,
+    o = false,
     j = { false }
 }
 --// Animation
@@ -435,13 +435,13 @@ _G.connection[1] = UserInputService.InputBegan:Connect(function(input, gameProce
             end
         end
         
-        if input.KeyCode == Enum.KeyCode.N then
-        if cooldown.n == true or cooldown.keybindAction == true then
+        if input.KeyCode == Enum.KeyCode.O then
+        if cooldown.o == true or cooldown.keybindAction == true then
             return
         end
 
         cooldown.keybindAction = true
-        cooldown.n = true
+        cooldown.o = true
 
         workspace.ServerStuff.handlePerkVisibility:FireServer("scanner")
 
@@ -461,7 +461,7 @@ _G.connection[1] = UserInputService.InputBegan:Connect(function(input, gameProce
         cooldown.keybindAction = false
 
         task.delay(30, function()
-            cooldown.n = false
+            cooldown.o = false
         end)
     end
         
